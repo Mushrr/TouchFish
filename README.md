@@ -6,5 +6,5 @@ The predecessor of another application named Timer, Try to use what I learn deve
 
 #### Contact Me
 
-huangxingjiegkd@163.com
+huangxingjiegkd@163.com  
 mushroom@mails.ccnu.edu.cn
