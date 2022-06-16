@@ -52,23 +52,24 @@ export default {
       //   duration: 1.5,
       //   opacity: 0
       // })
-      gsap.from('#login', {
+
+      let tween = gsap.timeline();
+
+      tween.from('#login', {
         display: 'none',
         y: window.innerHeight,
         opacity: 0,
-        duration: 2
-      })
-      gsap.from('.touchFish', {
-        display: 'none',
+      }).from('.touchFish', {
         y: window.innerHeight,
-        opacity: 0,
         duration: 1,
-      })
-      gsap.from('.loginBox', {
-        display: 'none',
-        y: window.innerHeight,
+        fontSize: 0,
         opacity: 0,
-        duration: 2,
+      }).from('.loginBox', {
+        y: window.innerHeight,
+        duration: 0.1,
+        height: 0,
+        width: 0,
+        opacity: 0,
       })
     });
   }
@@ -76,6 +77,9 @@ export default {
 </script>
 
 <style>
+@import url(./css/font.css);
+
+
 * {
   margin: 0;
   padding: 0;
@@ -92,7 +96,7 @@ body {
 
 .init {
   display: grid;
-  font: normal 400 4vw "MicroSoftYaHei";
+  font: normal 400 4vw "PingFang", "MicroSoftYaHei";
 
   height: 100vh;
   width: 100vw;

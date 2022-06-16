@@ -7,3 +7,6 @@
 ```shell
 yarn dev
 ```
+
+![](https://github.com/HuangXingjie2002/TouchFish/blob/main/assets/images/log.png)
+
