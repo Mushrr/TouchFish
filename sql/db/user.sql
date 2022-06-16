@@ -1,3 +1,5 @@
+-- user
+
 create table user {
     uuid varchar(16),
     nickname varchar(16), -- 名称最长为16
