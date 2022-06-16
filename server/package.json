@@ -5,11 +5,17 @@
   "main": "index.js",
   "author": "HuangXingjie2002",
   "license": "MIT",
+  "scripts": {
+    "dev": "node init.js",
+    "start": "node index.js"
+  },
   "devDependencies": {
     "@types/koa": "^2.13.4",
     "@types/node": "^16.11.40",
     "koa": "^2.13.4",
     "koa-router": "^10.1.1",
-    "koa-static": "^5.0.0"
-  }
+    "koa-static": "^5.0.0",
+    "mysql": "^2.18.1"
+  },
+  "dependencies": {}
 }

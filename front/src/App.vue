@@ -1,16 +1,18 @@
 <template>
   <div>
-    <div :class="['init', 'phone', { disappear: loadFinished }]">
+    <div id="mask" :class="['init', 'phone']">
       ✨ Just Begin: {{ msg }}
     </div>
-    <div :class="[{ disappear: !loadFinished }]">
-      <login-element></login-element>
+    <div id="login">
+      <loginElement :can-i-show-up="loadFinished"></loginElement>
     </div>
   </div>
 </template>
 
 <script>
 import loginElement from "./components/LoginComponent.vue";
+import gsap from 'gsap';
+
 
 export default {
   components: {
@@ -30,7 +32,44 @@ export default {
       }, 1000);
     });
     loadHander.then(() => {
+      gsap.to('#mask', {
+        duration: 1,
+        y: -window.innerHeight,
+        ease: 'power2',
+      });
       this.loadFinished = true;
+      // gsap.from('.touchFish', {
+      //   delay: 3,
+      //   y: window.innerHeight,
+      //   ease: 'power2',
+      //   duration: 1,
+      //   opacity: 0,
+      // })
+      // gsap.from('.loginBox', {
+      //   y: window.innerHeight,
+      //   delay: 3,
+      //   ease: 'power2',
+      //   duration: 1.5,
+      //   opacity: 0
+      // })
+      gsap.from('#login', {
+        display: 'none',
+        y: window.innerHeight,
+        opacity: 0,
+        duration: 2
+      })
+      gsap.from('.touchFish', {
+        display: 'none',
+        y: window.innerHeight,
+        opacity: 0,
+        duration: 1,
+      })
+      gsap.from('.loginBox', {
+        display: 'none',
+        y: window.innerHeight,
+        opacity: 0,
+        duration: 2,
+      })
     });
   }
 };
@@ -40,6 +79,15 @@ export default {
 * {
   margin: 0;
   padding: 0;
+}
+
+body {
+  background-color: #f3f3f3;;
+}
+
+#mask {
+  position: absolute;
+  background-color: #f3f3f3;
 }
 
 .init {

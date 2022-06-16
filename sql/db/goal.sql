@@ -1,6 +1,5 @@
--- Goal 
 
-create table goal (
+create table if not exists goal  (
     gInd varchar(16),
     gName text,
     gDescribe text,
@@ -11,6 +10,5 @@ create table goal (
 
     parentWInd varchar(16),
     uuid varchar(16), -- user 的 UUID
-    PRIMARY KEY(gInd),
-    comment '目标项，用于规定任务完成方式，任务描述信息，以及当前完成情况，并与父wishlist 关联'
-)
+    PRIMARY KEY(gInd)
+) comment='目标项，用于规定任务完成方式，任务描述信息，以及当前完成情况，并与父wishlist 关联';

@@ -29,10 +29,15 @@
 </template>
 
 <script>
-// import gsap from 'gsap';
+import gsap from "gsap";
 
 export default {
   name: "login-element",
+  props: {
+    canIShowUp: {
+        default: false
+    }
+  },
   data() {
     return {
       appname: "✨TouchFish",
@@ -42,7 +47,17 @@ export default {
     login() {
       // ... 登录
     },
+    showUp() {
+      gsap.from(
+        ".loginContainer",
+        {
+          duration: 3,
+          opacity: 0,
+        },
+      );
+    },
   },
+  
 };
 </script>
 
@@ -82,7 +97,6 @@ export default {
     1.5px 1.5px 44.3px rgba(0, 0, 0, 0.062);
   transition: all 0.5s;
 }
-
 
 .username,
 .password {
