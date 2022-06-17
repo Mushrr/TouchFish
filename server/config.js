@@ -7,7 +7,15 @@ const dbConfig = {
 
 const sqlPath = '../sql/db'
 
+const host = 'localhost';
+
+const port = '3000';
+
+
+
 module.exports = {
     dbConfig,
-    sqlPath
+    sqlPath,
+    host,
+    port
 }

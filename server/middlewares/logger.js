@@ -2,7 +2,7 @@
 const log4js = require('log4js');
 
 function reqLogger(ctx, cost) {
-    return `[${ctx.method}] - [${ctx.url}] - [${cost}ms]`
+    return `[${ctx.status}] - [${ctx.method}] - [${ctx.url}] - [${cost}ms]`
 }
 
 async function loggerMiddleware(ctx, next) {
