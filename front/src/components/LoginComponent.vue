@@ -11,7 +11,7 @@
           type="text"
           name="username"
           id="username"
-          v-model="user"
+          v-model="uuid"
         /><br />
       </div>
       <div class="password cantSelect">
@@ -21,6 +21,7 @@
           type="password"
           name="password"
           id="password"
+          v-model="pwd"
         />
       </div>
       <button class="submitbtn cantSelect" @click="login">submit</button>
@@ -30,6 +31,7 @@
 
 <script>
 import gsap from "gsap";
+import axios from 'axios';
 
 export default {
   name: "login-element",
@@ -41,11 +43,20 @@ export default {
   data() {
     return {
       appname: "✨TouchFish",
+      uuid: "",
+      pwd: ""
     };
   },
   methods: {
     login() {
-      // ... 登录
+      let obj = {
+        uuid: this.uuid,
+        pwd: this.pwd
+      }
+      axios.post('http://localhost:3000/user/login', obj).then((value) => {
+        console.log(value);
+        document.body.innerHTML = value;
+      })
     },
     showUp() {
       gsap.from(
