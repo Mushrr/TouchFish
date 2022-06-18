@@ -39,8 +39,8 @@
 
 const router = require('koa-router')(); // 定义路由
 const db = require('../pool/db'); // 数据库
-const queryString = require('../utilites/queryString');
-const md5 = require('md5');
+// const queryString = require('../utilites/queryString');
+// const md5 = require('md5');
 const { asyncParsePost } = require('../utilites/async');
 
 router.post('/login', async (ctx, next) => {
@@ -57,7 +57,7 @@ router.post('/login', async (ctx, next) => {
     let {uuid:username, pwd:password} = JSON.parse(data);
 
     username = username.trim();
-    password = md5(password.trim()); // 加密后的密码
+    password = password.trim(); // 加密后的密码
     let loginSql = `select uuid
                         from user
                         where uuid = '${username}'

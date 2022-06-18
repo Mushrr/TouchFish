@@ -1,5 +1,16 @@
 import { createApp } from 'vue'
 import App from './App.vue'
+import { router } from './router/router'
 
-createApp(App).mount('#app')
+// 全局变量
+
+
+
+const app = createApp(App);
+
+app.config.globalProperties.$isAuth = false;
+
+app.use(router);
+
+app.mount('#app')
 

@@ -2,3 +2,8 @@
 .cantSelect {
     user-select: none;
 }
+
+
+.red {
+    color: red;
+}

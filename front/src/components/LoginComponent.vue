@@ -5,7 +5,7 @@
     </div>
     <div class="loginBox">
       <div class="username cantSelect">
-        <label for="username">用户名:</label>
+        <label for="username" :class="[{ red: !isChecked }]">用户名:</label>
         <input
           class="input-blue"
           type="text"
@@ -15,7 +15,7 @@
         /><br />
       </div>
       <div class="password cantSelect">
-        <label for="password">密码:</label>
+        <label for="password" :class="[{ red: !isChecked }]">密码:</label>
         <input
           class="input-blue"
           type="password"
@@ -31,44 +31,106 @@
 
 <script>
 import gsap from "gsap";
-import axios from 'axios';
+import axios from "axios";
+import md5 from "md5";
 
 export default {
   name: "login-element",
   props: {
     canIShowUp: {
-        default: false
-    }
+      default: false,
+    },
   },
   data() {
     return {
       appname: "✨TouchFish",
       uuid: "",
-      pwd: ""
+      pwd: "",
+      isChecked: true,
     };
   },
   methods: {
+    clear() {
+      this.pwd = "";
+    },
+
+    wrong() {
+      // shake
+
+      this.isChecked = false;
+      this.clear();
+      console.log(this.isChecked);
+      let tween = gsap.timeline();
+      tween.to(".username, .password", {
+        x: 6,
+        duration: 0.1,
+        yoyo: true,
+        repeat: 5,
+      });
+    },
     login() {
       let obj = {
         uuid: this.uuid,
-        pwd: this.pwd
+        pwd: md5(this.pwd),
+      };
+      //
+      if (this.loginValidate()) {
+        axios
+          .post("http://localhost:3000/user/login", obj)
+          .then((value) => {
+            console.log(value);
+            this.$router.push("/dashboard");
+          })
+          .catch((err) => {
+            this.wrong();
+            console.log(err); // 在此处对错误处理
+          });
+      } else {
+        this.wrong();
       }
-      axios.post('http://localhost:3000/user/login', obj).then((value) => {
-        console.log(value);
-        document.body.innerHTML = value;
-      })
+    },
+    loginValidate() {
+      // 检查规范
+      // 检查是否有空格
+
+      if (this.uuid.indexOf(" ") > -1 || this.uuid.indexOf(" ") > -1) {
+        return false;
+      }
+
+      // 检查是否有存在不合规字符
+      let pattern = /[^A-Za-z0-9]/;
+
+      if (pattern.test(this.uuid) || pattern.test(this.pwd)) {
+        return false;
+      }
+
+      if (
+        this.uuid.length >= 8 &&
+        this.uuid.length <= 14 &&
+        this.pwd.length >= 6
+      ) {
+        return true; // 允许的格式
+      } else {
+        return false;
+      }
     },
     showUp() {
-      gsap.from(
-        ".loginContainer",
-        {
-          duration: 3,
-          opacity: 0,
-        },
-      );
+      gsap.from(".loginContainer", {
+        duration: 3,
+        opacity: 0,
+      });
     },
   },
-  
+  watch: {
+    uuid() {
+      this.isChecked = true;
+    },
+    pwd(n) {
+      if (n != "") {
+        this.isChecked = true;
+      }
+    },
+  },
 };
 </script>
 
