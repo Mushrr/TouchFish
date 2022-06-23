@@ -1,59 +1,44 @@
-<template>
-  <div>
-    <div id="mask" :class="['init', 'phone']">✨ Just Begin: {{ msg }}</div>
-    <div id="login">
-      <loginElement :can-i-show-up="loadFinished"></loginElement>
-    </div>
-  </div>
-</template>
-
-<script>
+<script setup>
 import loginElement from "./LoginComponent.vue";
 import gsap from "gsap";
 
-export default {
-  name: "login-route",
-  components: {
-    loginElement,
-  },
-  data() {
-    return {
-      msg: "Welcome To TouchFish",
-      loadFinished: false,
-    };
-  },
-  mounted() {
-    const loadHander = new Promise((resolve) => {
-      setTimeout(() => {
-        console.log("这里");
-        resolve();
-      }, 1000);
+import {onMounted, ref} from "vue";
+
+const msg = ref("Welcome To TouchFish");
+let loadFinished = ref(false);
+
+onMounted(() => {
+  const loadHander = new Promise((resolve) => {
+    setTimeout(() => {
+      console.log("这里");
+      resolve();
+    }, 1000);
+  });
+  loadHander.then(() => {
+    gsap.to("#mask", {
+      duration: 1,
+      y: -window.innerHeight,
+      ease: "power2",
     });
-    loadHander.then(() => {
-      gsap.to("#mask", {
-        duration: 1,
-        y: -window.innerHeight,
-        ease: "power2",
-      });
-      this.loadFinished = true;
-      // gsap.from('.touchFish', {
-      //   delay: 3,
-      //   y: window.innerHeight,
-      //   ease: 'power2',
-      //   duration: 1,
-      //   opacity: 0,
-      // })
-      // gsap.from('.loginBox', {
-      //   y: window.innerHeight,
-      //   delay: 3,
-      //   ease: 'power2',
-      //   duration: 1.5,
-      //   opacity: 0
-      // })
+    loadFinished.value = true;
+    // gsap.from('.touchFish', {
+    //   delay: 3,
+    //   y: window.innerHeight,
+    //   ease: 'power2',
+    //   duration: 1,
+    //   opacity: 0,
+    // })
+    // gsap.from('.loginBox', {
+    //   y: window.innerHeight,
+    //   delay: 3,
+    //   ease: 'power2',
+    //   duration: 1.5,
+    //   opacity: 0
+    // })
 
-      let tween = gsap.timeline();
+    let tween = gsap.timeline();
 
-      tween
+    tween
         .from("#login", {
           display: "none",
           y: window.innerHeight,
@@ -72,12 +57,23 @@ export default {
           width: 0,
           opacity: 0,
         });
-    });
-  },
-};
+  })
+});
+
 </script>
 
-<style>
+
+<template>
+  <div>
+    <div id="mask" :class="['init', 'phone']">✨ Just Begin: {{ msg }}</div>
+    <div id="login">
+      <loginElement :can-i-show-up="loadFinished"></loginElement>
+    </div>
+  </div>
+</template>
+
+
+<style scoped>
 @import url(../css/font.css);
 
 * {

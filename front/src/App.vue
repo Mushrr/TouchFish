@@ -1,10 +1,14 @@
+<script setup>
+
+</script>
+
+
 <template>
   <div>
-    <router-view></router-view>
+    <Transition name="fade" mode="out-in">
+      <router-view></router-view>
+    </Transition>
   </div>
 </template>
 
 
-<script>
-
-</script>
