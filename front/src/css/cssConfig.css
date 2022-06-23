@@ -1,4 +1,10 @@
 :root {
     --font-pingfang: 'PingFang';
     --padding-box: 10px;
+    --font-color: black;
+}
+
+a {
+    text-decoration: none;
+    color: var(--font-color);
 }

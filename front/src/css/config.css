@@ -5,5 +5,13 @@
 
 
 .red {
-    color: red;
+    color: #ff6705;
+}
+
+.b-grey {
+    background-color: #f3f3f3;
+}
+
+.b-red {
+    background-color: #ff6705;
 }

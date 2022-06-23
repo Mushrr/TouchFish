@@ -1,5 +1,5 @@
 <script setup>
-import loginElement from "./LoginComponent.vue";
+import LoginComponent from "./LoginComponent.vue";
 import gsap from "gsap";
 
 import {onMounted, ref} from "vue";
@@ -67,7 +67,7 @@ onMounted(() => {
   <div>
     <div id="mask" :class="['init', 'phone']">✨ Just Begin: {{ msg }}</div>
     <div id="login">
-      <loginElement :can-i-show-up="loadFinished"></loginElement>
+      <login-component :can-i-show-up="loadFinished"></login-component>
     </div>
   </div>
 </template>
